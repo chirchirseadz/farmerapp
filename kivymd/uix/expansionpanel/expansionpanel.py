@@ -145,7 +145,7 @@ __all__ = (
 )
 
 import os
-from typing import Union
+from typing import NoReturn, Union
 
 from kivy.animation import Animation
 from kivy.clock import Clock
@@ -208,7 +208,7 @@ class MDExpansionPanelLabel(TwoLineListItem):
         super().__init__(**kwargs)
         Clock.schedule_once(self.set_paddings)
 
-    def set_paddings(self, interval: Union[int, float]) -> None:
+    def set_paddings(self, interval: Union[int, float]) -> NoReturn:
         self._txt_bot_pad = dp(36)
         self._txt_left_pad = dp(0)
 
@@ -355,7 +355,7 @@ class MDExpansionPanel(RelativeLayout):
             MDExpansionPanelThreeLine,
             MDExpansionPanelLabel,
         ],
-    ) -> None:
+    ) -> NoReturn:
         """
         Called when you click on the panel. Called methods to open or close
         a panel.
@@ -377,7 +377,7 @@ class MDExpansionPanel(RelativeLayout):
         if not press_current_panel:
             self.set_chevron_down()
 
-    def set_chevron_down(self) -> None:
+    def set_chevron_down(self) -> NoReturn:
         """Sets the chevron down."""
 
         if not isinstance(self.panel_cls, MDExpansionPanelLabel):
@@ -385,7 +385,9 @@ class MDExpansionPanel(RelativeLayout):
         self.open_panel()
         self.dispatch("on_open")
 
-    def set_chevron_up(self, instance_chevron: MDExpansionChevronRight) -> None:
+    def set_chevron_up(
+        self, instance_chevron: MDExpansionChevronRight
+    ) -> NoReturn:
         """Sets the chevron up."""
 
         if not isinstance(self.panel_cls, MDExpansionPanelLabel):
@@ -393,7 +395,7 @@ class MDExpansionPanel(RelativeLayout):
 
     def close_panel(
         self, instance_expansion_panel, press_current_panel: bool
-    ) -> None:
+    ) -> NoReturn:
         """Method closes the panel."""
 
         if self._anim_playing:
@@ -412,7 +414,7 @@ class MDExpansionPanel(RelativeLayout):
         anim.bind(on_complete=self._disable_anim)
         anim.start(instance_expansion_panel)
 
-    def open_panel(self, *args) -> None:
+    def open_panel(self, *args) -> NoReturn:
         """Method opens a panel."""
 
         if self._anim_playing:

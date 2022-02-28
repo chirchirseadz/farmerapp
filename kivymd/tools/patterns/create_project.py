@@ -104,7 +104,7 @@ Optional arguments
 import os
 import re
 import shutil
-from typing import Union
+from typing import NoReturn, Union
 
 from kivy import Logger, platform
 
@@ -179,7 +179,7 @@ class {name_screen}Model(BaseScreenModel):
     :class:`~View.{module_name}.{name_screen}.{name_screen}View` class.
     """'''
 
-_firebase_controller = '''
+_firebase_controller = '''from typing import NoReturn
 {import_module}
 
 
@@ -197,22 +197,22 @@ class {name_screen}Controller:
             controller=self, model=self.model
         )
 
-    def set_user_data(self, key, value) -> None:
+    def set_user_data(self, key, value) -> NoReturn:
         """Called every time the user enters text into the text fields."""
 
         self.model.set_user_data(key, value)
 
-    def on_tap_button_login(self) -> None:
+    def on_tap_button_login(self) -> NoReturn:
         """Called when the `LOGIN` button is pressed."""
 
         self.view.show_dialog_wait()
         self.model.chek_data()
 
-    def reset_data_validation_status(self, *args) -> None:
+    def reset_data_validation_status(self, *args) -> NoReturn:
         self.model.reset_data_validation_status()
 '''
 
-_without_firebase_controller = '''
+_without_firebase_controller = '''from typing import NoReturn
 {import_module}
 
 
@@ -228,14 +228,14 @@ class {name_screen}Controller:
         self.model = model  # Model.{module_name}.{name_screen}Model
         self.view = {name_view}(controller=self, model=self.model)
 
-    def on_tap_button_login(self) -> None:
+    def on_tap_button_login(self) -> NoReturn:
         """Called when the `LOGIN` button is pressed."""
 
-    def set_user_data(self, key, value) -> None:
+    def set_user_data(self, key, value) -> NoReturn:
         """Called every time the user enters text into the text fields."""
 '''
 
-_firebase_view_import = """from typing import Union
+_firebase_view_import = """from typing import Union, NoReturn
 
 from kivy.clock import Clock
 
@@ -243,7 +243,7 @@ from kivymd.uix.dialog import MDDialog
 from kivymd.uix.snackbar import Snackbar
 """
 
-_without_firebase_view_import = """
+_without_firebase_view_import = """from typing import NoReturn
 """
 
 _firebase_view_methods = '''    def __init__(self, **kwargs):
@@ -251,14 +251,14 @@ _firebase_view_methods = '''    def __init__(self, **kwargs):
         self.dialog = MDDialog()
         self.dialog.bind(on_dismiss=self.controller.reset_data_validation_status)
 
-    def show_dialog_wait(self) -> None:
+    def show_dialog_wait(self) -> NoReturn:
         """Displays a wait dialog while the model is processing data."""
 
         self.dialog.auto_dismiss = False
         self.dialog.text = "Data validation..."
         self.dialog.open()
 
-    def show_toast(self, interval: Union[int, float]) -> None:
+    def show_toast(self, interval: Union[int, float]) -> NoReturn:
         Snackbar(
             text="You have passed the verification successfully!",
             snackbar_x="10dp",
@@ -305,6 +305,7 @@ DEBUG=1 python main.py
 
 import importlib
 import os
+from typing import NoReturn
 
 from kivy import Config
 from kivy.uix.screenmanager import ScreenManager
@@ -361,7 +362,7 @@ class %s(MDApp):
 
         return self.manager_screens
 
-    def on_keyboard_down(self, window, keyboard, keycode, text, modifiers) -> None:
+    def on_keyboard_down(self, window, keyboard, keycode, text, modifiers) -> NoReturn:
         """
         The method handles keyboard events.
 
@@ -465,7 +466,7 @@ def main():
             ) as requirements:
                 requirements.write("watchdog")
         if use_localization == "yes":
-            Logger.info("KivyMD: Create localization files...")
+            Logger.info(f"KivyMD: Create localization files...")
             create_makefile(
                 path_to_project, project_name, module_name, name_screen
             )
@@ -495,7 +496,7 @@ def create_main_with_hotreload(
     module_name: str,
     use_firebase: str,
     use_localization: str,
-) -> None:
+) -> NoReturn:
     with open(
         os.path.join(path_to_project, "main.py"), encoding="utf-8"
     ) as main_file:
@@ -530,11 +531,11 @@ def create_main_with_hotreload(
             if use_localization == "yes"
             else "",
             "self.base" if use_firebase == "yes" else "",
-            "\n\n    def on_lang(self, instance_app, lang_value: str) -> None:\n"
+            "\n\n    def on_lang(self, instance_app, lang_value: str) -> NoReturn:\n"
             "        self.translation.switch_lang(lang_value)\n"
             if use_localization == "yes"
             else "",
-            "\n    def switch_lang(self) -> None:\n"
+            "\n    def switch_lang(self) -> NoReturn:\n"
             '        """Switch lang."""\n\n'
             '        self.lang = "ru" if self.lang == "en" else "en"'
             if use_localization == "yes"
@@ -549,7 +550,7 @@ def create_main(
     use_localization: str,
     path_to_project: str,
     project_name: str,
-) -> None:
+) -> NoReturn:
     replace_in_file(
         os.path.join(path_to_project, "main.py_tmp"),
         (
@@ -571,11 +572,11 @@ def create_main(
             else "",
             "self.base = Base()\n" if use_firebase == "yes" else "",
             "self.base" if use_firebase == "yes" else "",
-            "\n    def on_lang(self, instance_app, lang_value: str) -> None:\n"
+            "\n    def on_lang(self, instance_app, lang_value: str) -> NoReturn:\n"
             "        self.translation.switch_lang(lang_value)\n"
             if use_localization == "yes"
             else "",
-            "\n    def switch_lang(self) -> None:\n"
+            "\n    def switch_lang(self) -> NoReturn:\n"
             '        """Switch lang."""\n\n'
             '        self.lang = "ru" if self.lang == "en" else "en"\n'
             if use_localization == "yes"
@@ -587,7 +588,7 @@ def create_main(
 
 def create_model(
     use_firebase: str, name_screen: str, module_name: str, path_to_project: str
-) -> None:
+) -> NoReturn:
     if use_firebase == "yes":
         firebase_model = _firebase_model.format(
             name_screen=name_screen, module_name=module_name
@@ -617,7 +618,7 @@ def create_controller(
     name_screen: str,
     module_name: str,
     path_to_project: str,
-) -> None:
+) -> NoReturn:
     if use_firebase == "yes":
         firebase_controller = _firebase_controller
     else:
@@ -657,7 +658,7 @@ def create_view(
     name_screen: str,
     module_name: str,
     path_to_project: str,
-) -> None:
+) -> NoReturn:
     replace_in_file(
         os.path.join(path_to_project, "View", "screens.py_tmp"),
         (
@@ -740,7 +741,7 @@ def create_view(
     )
 
 
-def create_requirements(use_firebase: str, path_to_project: str) -> None:
+def create_requirements(use_firebase: str, path_to_project: str) -> NoReturn:
     with open(
         os.path.join(path_to_project, "requirements.txt"), "w", encoding="utf-8"
     ) as requirements:
@@ -753,7 +754,7 @@ def create_requirements(use_firebase: str, path_to_project: str) -> None:
 
 def create_makefile(
     path_to_project: str, project_name: str, module_name: str, name_screen: str
-) -> None:
+) -> NoReturn:
     replace_in_file(
         os.path.join(path_to_project, "Makefile"),
         (
@@ -769,21 +770,21 @@ def create_makefile(
     os.system("make po")
 
 
-def create_mofile(path_to_project: str) -> None:
+def create_mofile(path_to_project: str) -> NoReturn:
     os.chdir(path_to_project)
     os.system("make mo")
 
 
 def create_virtual_environment(
     python_version: str, path_to_project: str
-) -> None:
+) -> NoReturn:
     os.system(f"{python_version} -m pip install virtualenv")
     os.system(
         f"virtualenv -p {python_version} {os.path.join(path_to_project, 'venv')}"
     )
 
 
-def localization_po_file(path_to_project: str) -> None:
+def localization_po_file(path_to_project: str) -> NoReturn:
     path_to_file_po = os.path.join(
         path_to_project, "data", "locales", "po", "ru.po"
     )
@@ -811,7 +812,7 @@ def localization_po_file(path_to_project: str) -> None:
 
 def install_requirements(
     path_to_project: str, kivy_version: str, use_firebase: str
-) -> None:
+) -> NoReturn:
     python = os.path.join(path_to_project, "venv", "bin", "python3")
     if kivy_version == "master":
         if platform == "macosx":
@@ -847,7 +848,7 @@ def install_requirements(
     )
 
 
-def rename_ext_py_tmp_to_py(path_to_project: str) -> None:
+def rename_ext_py_tmp_to_py(path_to_project: str) -> NoReturn:
     for path_to_dir, dirs, files in os.walk(path_to_project):
         for name_file in files:
             if os.path.splitext(name_file)[1] == ".py_tmp":
@@ -859,7 +860,7 @@ def rename_ext_py_tmp_to_py(path_to_project: str) -> None:
                 )
 
 
-def move_init(path_to_project: str, name_screen: str) -> None:
+def move_init(path_to_project: str, name_screen: str) -> NoReturn:
     path_to_init_file = __file__.replace("create_project", "__init__")
     for name_dir in ("Controller", "Model", "Utility", "View"):
         shutil.copy(
@@ -886,7 +887,7 @@ def chek_camel_case_name_project(name_project) -> Union[bool, list]:
     return result
 
 
-def replace_in_file(path_to_file: str, args) -> None:
+def replace_in_file(path_to_file: str, args) -> NoReturn:
     with open(path_to_file, "rt", encoding="utf-8") as file_content:
         new_file_content = file_content.read() % (args)
         with open(path_to_file, "wt", encoding="utf-8") as original_file:

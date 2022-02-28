@@ -303,6 +303,7 @@ Only one chip will be selected.
 __all__ = ("MDChip",)
 
 import os
+from typing import NoReturn
 
 from kivy import Logger
 from kivy.animation import Animation
@@ -468,18 +469,20 @@ class MDChip(
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
-    def on_long_touch(self, *args) -> None:
+    def on_long_touch(self, *args) -> NoReturn:
         if self.active:
             return
         self.active = True if not self.active else False
 
-    def on_active(self, instance_check, active_value: bool) -> None:
+    def on_active(self, instance_check, active_value: bool) -> NoReturn:
         if active_value:
             self.do_animation_check((0, 0, 0, 0.4), 1)
         else:
             self.do_animation_check((0, 0, 0, 0), 0)
 
-    def do_animation_check(self, md_bg_color: list, scale_value: int) -> None:
+    def do_animation_check(
+        self, md_bg_color: list, scale_value: int
+    ) -> NoReturn:
         Animation(md_bg_color=md_bg_color, t="out_sine", d=0.1).start(
             self.ids.icon_left_box
         )

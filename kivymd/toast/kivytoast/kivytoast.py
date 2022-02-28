@@ -38,7 +38,7 @@ KivyToast
     Test().run()
 """
 
-from typing import List
+from typing import List, NoReturn
 
 from kivy.animation import Animation
 from kivy.clock import Clock
@@ -88,7 +88,7 @@ class Toast(BaseDialog):
 
     def label_check_texture_size(
         self, instance_label: Label, texture_size: List[int]
-    ) -> None:
+    ) -> NoReturn:
         """
         Resizes the text if the text texture is larger than the screen size.
         Sets the size of the toast according to the texture size of the toast
@@ -102,26 +102,26 @@ class Toast(BaseDialog):
             texture_width, texture_height = instance_label.texture_size
         self.size = (texture_width + 25, texture_height + 25)
 
-    def toast(self, text_toast: str) -> None:
+    def toast(self, text_toast: str) -> NoReturn:
         """Displays a toast."""
 
         self.label_toast.text = text_toast
         self.open()
 
-    def on_open(self) -> None:
+    def on_open(self) -> NoReturn:
         """Default open event handler."""
 
         self.fade_in()
         Clock.schedule_once(self.fade_out, self.duration)
 
-    def fade_in(self) -> None:
+    def fade_in(self) -> NoReturn:
         """Animation of opening toast on the screen."""
 
         anim = Animation(opacity=1, duration=0.4)
         anim.start(self.label_toast)
         anim.start(self)
 
-    def fade_out(self, *args) -> None:
+    def fade_out(self, *args) -> NoReturn:
         """Animation of hiding toast on the screen."""
 
         anim = Animation(opacity=0, duration=0.4)
@@ -140,7 +140,7 @@ class Toast(BaseDialog):
 
 def toast(
     text: str = "", background: list = None, duration: float = 2.5
-) -> None:
+) -> NoReturn:
     """
     Displays a toast.
 

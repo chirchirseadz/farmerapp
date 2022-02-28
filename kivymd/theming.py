@@ -169,6 +169,7 @@ respects, the theming stays as documented.
     dictionary ``colors``.
 """
 
+from typing import NoReturn
 
 from kivy.app import App
 from kivy.atlas import Atlas
@@ -906,7 +907,7 @@ class ThemeManager(EventDispatcher):
     def _get_ripple_color(self) -> list:
         return self._ripple_color
 
-    def _set_ripple_color(self, value) -> None:
+    def _set_ripple_color(self, value) -> NoReturn:
         self._ripple_color = value
 
     _ripple_color = ColorProperty(get_color_from_hex(colors["Gray"]["400"]))
@@ -923,7 +924,7 @@ class ThemeManager(EventDispatcher):
     property is readonly.
     """
 
-    def _determine_device_orientation(self, _, window_size) -> None:
+    def _determine_device_orientation(self, _, window_size) -> NoReturn:
         if window_size[0] > window_size[1]:
             self.device_orientation = "landscape"
         elif window_size[1] >= window_size[0]:
@@ -971,7 +972,7 @@ class ThemeManager(EventDispatcher):
     property is readonly.
     """
 
-    def on_theme_style(self, interval: int, theme_style: str) -> None:
+    def on_theme_style(self, interval: int, theme_style: str) -> NoReturn:
         if (
             hasattr(App.get_running_app(), "theme_cls")
             and App.get_running_app().theme_cls == self
@@ -1062,7 +1063,7 @@ class ThemeManager(EventDispatcher):
         accent_hue: str,
         accent_light_hue: str,
         accent_dark_hue: str,
-    ) -> None:
+    ) -> NoReturn:
         """
         Courtesy method to allow all of the theme color attributes to be set in one call.
 
@@ -1127,7 +1128,7 @@ class ThemeManager(EventDispatcher):
         self.colors = colors
         Clock.schedule_once(self.sync_theme_styles)
 
-    def sync_theme_styles(self, *args) -> None:
+    def sync_theme_styles(self, *args) -> NoReturn:
         # Syncs the values from self.font_styles to theme_font_styles
         # this will ensure continuity when someone registers a new font_style.
         for num, style in enumerate(theme_font_styles):

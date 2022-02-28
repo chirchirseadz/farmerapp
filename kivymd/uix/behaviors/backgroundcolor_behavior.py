@@ -7,7 +7,7 @@ Behaviors/Background Color
 
 __all__ = ("BackgroundColorBehavior", "SpecificBackgroundColorBehavior")
 
-from typing import List
+from typing import List, NoReturn
 
 from kivy.lang import Builder
 from kivy.properties import (
@@ -194,7 +194,7 @@ class BackgroundColorBehavior(CommonElevationBehavior):
 
     def update_background_origin(
         self, instance_md_widget, pos: List[float]
-    ) -> None:
+    ) -> NoReturn:
         if self.background_origin:
             self._background_origin = self.background_origin
         else:
@@ -246,7 +246,7 @@ class SpecificBackgroundColorBehavior(BackgroundColorBehavior):
 
     def _update_specific_text_color(
         self, instance_theme_manager: ThemeManager, theme_style: str
-    ) -> None:
+    ) -> NoReturn:
         if hasattr(self, "theme_cls"):
             palette = {
                 "Primary": self.theme_cls.primary_palette,

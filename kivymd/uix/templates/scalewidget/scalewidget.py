@@ -15,6 +15,8 @@ Kivy
 
 .. code-block:: python
 
+    from typing import NoReturn
+
     from kivy.animation import Animation
     from kivy.lang import Builder
     from kivy.properties import NumericProperty
@@ -52,7 +54,7 @@ Kivy
         def build(self):
             return Builder.load_string(KV)
 
-        def change_scale(self, instance_button: Button) -> None:
+        def change_scale(self, instance_button: Button) -> NoReturn:
             Animation(
                 scale_value_x=0.5,
                 scale_value_y=0.5,
@@ -67,6 +69,8 @@ KivyMD
 ------
 
 .. code-block:: python
+
+    from typing import NoReturn
 
     from kivy.animation import Animation
     from kivy.lang import Builder
@@ -94,7 +98,7 @@ KivyMD
         def build(self):
             return Builder.load_string(KV)
 
-        def change_scale(self, instance_button: MDRaisedButton) -> None:
+        def change_scale(self, instance_button: MDRaisedButton) -> NoReturn:
             Animation(
                 scale_value_x=0.5,
                 scale_value_y=0.5,

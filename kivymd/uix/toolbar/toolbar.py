@@ -330,7 +330,7 @@ __all__ = ("MDToolbar", "MDBottomAppBar", "MDActionTopAppBarButton")
 
 import os
 from math import cos, radians, sin
-from typing import Union
+from typing import NoReturn, Union
 
 from kivy.animation import Animation
 from kivy.clock import Clock
@@ -726,14 +726,14 @@ class MDToolbar(NotchedBox):
         )
         Clock.schedule_once(self.update_floating_radius)
 
-    def set_headline_font_style(self, interval: Union[int, float]) -> None:
+    def set_headline_font_style(self, interval: Union[int, float]) -> NoReturn:
         if self.type_height in ("medium", "large"):
             self.ids.label_headline.font_style = {
                 "medium": "H6",
                 "large": "H5",
             }[self.type_height]
 
-    def on_type(self, instance_toolbar, type_value: str) -> None:
+    def on_type(self, instance_toolbar, type_value: str) -> NoReturn:
         if type_value == "bottom":
             self.action_button.bind(center_x=self.setter("notch_center_x"))
             self.action_button.bind(
@@ -749,7 +749,9 @@ class MDToolbar(NotchedBox):
             )
             self.on_mode(None, self.mode)
 
-    def on_type_height(self, instance_toolbar, height_type_value: str) -> None:
+    def on_type_height(
+        self, instance_toolbar, height_type_value: str
+    ) -> NoReturn:
         if self.theme_cls.material_style == "M2":
             self.height = self.theme_cls.standard_increment
         else:
@@ -767,13 +769,15 @@ class MDToolbar(NotchedBox):
     def on_action_button(self, *args):
         pass
 
-    def on_md_bg_color(self, instance_toolbar, color_value: list) -> None:
+    def on_md_bg_color(self, instance_toolbar, color_value: list) -> NoReturn:
         if self.type == "bottom":
             self.md_bg_color = [0, 0, 0, 0]
         else:
             set_bars_colors(color_value, None, self.theme_cls.theme_style)
 
-    def on_left_action_items(self, instance_toolbar, items_value: list) -> None:
+    def on_left_action_items(
+        self, instance_toolbar, items_value: list
+    ) -> NoReturn:
         def on_left_action_items(interval: Union[int, float]):
             self.update_action_bar(self.ids.left_actions, items_value)
 
@@ -781,30 +785,30 @@ class MDToolbar(NotchedBox):
 
     def on_right_action_items(
         self, instance_toolbar, items_value: list
-    ) -> None:
+    ) -> NoReturn:
         def on_right_actions(interval: Union[int, float]):
             self.update_action_bar(self.ids.right_actions, items_value)
 
         Clock.schedule_once(on_right_actions)
 
-    def on_icon(self, instance_toolbar, icon_name: str) -> None:
+    def on_icon(self, instance_toolbar, icon_name: str) -> NoReturn:
         self.action_button.icon = icon_name
 
-    def on_icon_color(self, instance, icon_name: str) -> None:
+    def on_icon_color(self, instance, icon_name: str) -> NoReturn:
         self.action_button.md_bg_color = icon_name
 
     def on_md_bg_bottom_color(
         self, instance_toolbar, color_value: list
-    ) -> None:
+    ) -> NoReturn:
         set_bars_colors(None, color_value, self.theme_cls.theme_style)
 
-    def on_anchor_title(self, instance_toolbar, anchor_value: str) -> None:
+    def on_anchor_title(self, instance_toolbar, anchor_value: str) -> NoReturn:
         def on_anchor_title(interval: Union[int, float]):
             self.ids.label_title.halign = anchor_value
 
         Clock.schedule_once(on_anchor_title)
 
-    def on_mode(self, instance_toolbar, mode_value: str) -> None:
+    def on_mode(self, instance_toolbar, mode_value: str) -> NoReturn:
         if self.type == "top":
             return
 
@@ -850,27 +854,27 @@ class MDToolbar(NotchedBox):
 
         Clock.schedule_once(on_mode)
 
-    def set_md_bg_color(self, instance_toolbar, color_value: list) -> None:
+    def set_md_bg_color(self, instance_toolbar, color_value: list) -> NoReturn:
         if color_value == [1.0, 1.0, 1.0, 0.0]:
             self.md_bg_color = self.theme_cls.primary_color
 
-    def set_notch(self) -> None:
+    def set_notch(self) -> NoReturn:
         anim = Animation(d=0.1) + Animation(
             notch_radius=self.action_button.width / 2 + dp(8),
             d=0.1,
         )
         anim.start(self)
 
-    def set_shadow(self, *args) -> None:
+    def set_shadow(self, *args) -> NoReturn:
         self.action_button._elevation = self.action_button.elevation
 
     def update_bar_height(
         self, instance_theme_manager, material_style_value: str
-    ) -> None:
+    ) -> NoReturn:
         self.on_type_height(self, self.type_height)
         self.update_anchor_title(material_style_value)
 
-    def update_floating_radius(self, interval: Union[int, float]) -> None:
+    def update_floating_radius(self, interval: Union[int, float]) -> NoReturn:
         self.action_button.radius = self.action_button.width / 2
 
     def update_anchor_title(self, material_style_value: str) -> str:
@@ -885,7 +889,7 @@ class MDToolbar(NotchedBox):
 
     def update_action_bar(
         self, instance_box_layout, action_bar_items: list
-    ) -> None:
+    ) -> NoReturn:
         instance_box_layout.clear_widgets()
         new_width = 0
         for item in action_bar_items:
@@ -913,26 +917,26 @@ class MDToolbar(NotchedBox):
             )
         instance_box_layout.width = new_width
 
-    def update_md_bg_color(self, *args) -> None:
+    def update_md_bg_color(self, *args) -> NoReturn:
         self.md_bg_color = self.theme_cls._get_primary_color()
 
     def update_opposite_colors(
         self, instance_toolbar, opposite_value: bool
-    ) -> None:
+    ) -> NoReturn:
         if opposite_value:
             self.ids.label_title.theme_text_color = ""
 
-    def update_action_bar_text_colors(self, *args) -> None:
+    def update_action_bar_text_colors(self, *args) -> NoReturn:
         for child in self.ids["left_actions"].children:
             child.text_color = self.specific_text_color
         for child in self.ids["right_actions"].children:
             child.text_color = self.specific_text_color
 
-    def remove_notch(self) -> None:
+    def remove_notch(self) -> NoReturn:
         anim = Animation(d=0.1) + Animation(notch_radius=0, d=0.1)
         anim.start(self)
 
-    def remove_shadow(self) -> None:
+    def remove_shadow(self) -> NoReturn:
         self.action_button._elevation = 0
 
     def _on_resize(self, instance, width, height):

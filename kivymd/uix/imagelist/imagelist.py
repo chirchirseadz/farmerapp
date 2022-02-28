@@ -118,6 +118,7 @@ SmartTileWithLabel
 __all__ = ("SmartTile", "SmartTileWithLabel", "SmartTileWithStar")
 
 import os
+from typing import NoReturn
 
 from kivy.lang import Builder
 from kivy.properties import (
@@ -240,7 +241,7 @@ class SmartTileWithStar(SmartTileWithLabel):
     and defaults to `1`.
     """
 
-    def on_stars(self, *args) -> None:
+    def on_stars(self, *args) -> NoReturn:
         for star in range(self.stars):
             self.ids.box.add_widget(
                 _Star(

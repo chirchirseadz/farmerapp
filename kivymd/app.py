@@ -41,6 +41,7 @@ the current ``FPS`` value in your application:
 __all__ = ("MDApp",)
 
 import os
+from typing import NoReturn
 
 from kivy.app import App
 from kivy.lang import Builder
@@ -52,7 +53,7 @@ from kivymd.theming import ThemeManager
 class FpsMonitoring:
     """Implements a monitor to display the current FPS in the toolbar."""
 
-    def fps_monitor_start(self) -> None:
+    def fps_monitor_start(self) -> NoReturn:
         """Adds a monitor to the main application window."""
 
         from kivy.core.window import Window
@@ -99,7 +100,7 @@ class MDApp(App, FpsMonitoring):
         super().__init__(**kwargs)
         self.theme_cls = ThemeManager()
 
-    def load_all_kv_files(self, path_to_directory: str) -> None:
+    def load_all_kv_files(self, path_to_directory: str) -> NoReturn:
         """
         Recursively loads KV files from the selected directory.
 
