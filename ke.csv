@@ -1,0 +1,54 @@
+city,lat,lon,country,iso2,admin_name,capital
+Nairobi,-1.2864,36.8172,Kenya,KE,Nairobi City,primary
+Meru,0.05,37.65,Kenya,KE,Meru,admin
+Mombasa,-4.05,39.6667,Kenya,KE,Mombasa,admin
+Kisumu,-0.1,34.75,Kenya,KE,Kisumu,admin
+Nakuru,-0.2833,36.0667,Kenya,KE,Nakuru,admin
+Eldoret,0.5167,35.2833,Kenya,KE,Uasin Gishu,admin
+Machakos,-1.5167,37.2667,Kenya,KE,Machakos,admin
+Kisii,-0.6698,34.7675,Kenya,KE,Kisii,admin
+Mumias,0.3333,34.4833,Kenya,KE,Kakamega,
+Thika,-1.0396,37.09,Kenya,KE,Kiambu,
+Nyeri,-0.4167,36.95,Kenya,KE,Nyeri,admin
+Malindi,-3.21,40.1,Kenya,KE,Kilifi,
+Kakamega,0.2833,34.75,Kenya,KE,Kakamega,admin
+Kendu Bay,-0.3596,34.64,Kenya,KE,Homa Bay,
+Lodwar,3.1167,35.6,Kenya,KE,Turkana,admin
+Athi River,-1.45,36.9833,Kenya,KE,Machakos,
+Kilifi,-3.6333,39.85,Kenya,KE,Kilifi,
+Sotik,-0.6796,35.12,Kenya,KE,Bomet,
+Garissa,-0.4569,39.6583,Kenya,KE,Garissa,admin
+Kitale,1.0167,35,Kenya,KE,Trans Nzoia,admin
+Bungoma,0.5666,34.5666,Kenya,KE,Bungoma,admin
+Isiolo,0.35,37.5833,Kenya,KE,Isiolo,admin
+Wajir,1.75,40.0667,Kenya,KE,Wajir,admin
+Embu,-0.5333,37.45,Kenya,KE,Embu,admin
+Voi,-3.3696,38.57,Kenya,KE,Taita/Taveta,
+Homa Bay,-0.5167,34.45,Kenya,KE,Homa Bay,admin
+Nanyuki,0.0167,37.0667,Kenya,KE,Laikipia,
+Busia,0.4608,34.1108,Kenya,KE,Busia,admin
+Mandera,3.9167,41.8333,Kenya,KE,Mandera,admin
+Kericho,-0.3692,35.2839,Kenya,KE,Kericho,admin
+Kitui,-1.3667,38.0167,Kenya,KE,Kitui,admin
+Maralal,1.1,36.7,Kenya,KE,Samburu,admin
+Lamu,-2.2686,40.9003,Kenya,KE,Lamu,admin
+Kapsabet,0.2,35.1,Kenya,KE,Nandi,admin
+Marsabit,2.3333,37.9833,Kenya,KE,Marsabit,admin
+Hola,-1.5,40.03,Kenya,KE,Tana River,admin
+Kiambu,-1.1714,36.8356,Kenya,KE,Kiambu,admin
+Kabarnet,0.4919,35.743,Kenya,KE,Baringo,admin
+Migori,-1.0634,34.4731,Kenya,KE,Migori,admin
+Kerugoya,-0.4989,37.2803,Kenya,KE,Kirinyaga,admin
+Iten,0.6703,35.5081,Kenya,KE,Elgeyo/Marakwet,admin
+Nyamira,-0.5633,34.9358,Kenya,KE,Nyamira,admin
+Murang’a,-0.721,37.1526,Kenya,KE,Murang’a,admin
+Sotik Post,-0.7813,35.3416,Kenya,KE,Bomet,admin
+Siaya,0.0607,34.2881,Kenya,KE,Siaya,admin
+Kapenguria,1.2389,35.1119,Kenya,KE,West Pokot,admin
+Wote,-1.7808,37.6288,Kenya,KE,Makueni,admin
+Mwatate,-3.505,38.3772,Kenya,KE,Taita/Taveta,admin
+Kajiado,-1.85,36.7833,Kenya,KE,Kajiado,admin
+Ol Kalou,-0.2643,36.3788,Kenya,KE,Nyandarua,admin
+Narok,-1.0833,35.8667,Kenya,KE,Narok,admin
+Kwale,-4.1737,39.4521,Kenya,KE,Kwale,admin
+Rumuruti,0.2725,36.5381,Kenya,KE,Laikipia,admin
