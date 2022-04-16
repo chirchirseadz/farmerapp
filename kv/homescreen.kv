@@ -1,0 +1,43 @@
+#:import utils kivy.utils
+#:include kv/homemapview.kv
+ 
+<HomeScreen>:
+    FloatLayout:
+        MDToolbar:
+            title: "Search Markets"
+            right_action_items: [['magnify', lambda x: app.search_menu.open()]]
+            md_bg_color: app.theme_cls.primary_light
+            pos_hint: {"top": .895, "left": 1}
+            size_hint: 1, .1
+            
+        HomeMapView:
+            pos_hint: {"top": .810, "left": 1}
+            size_hint: 1, .695
+            id: mapview
+        GridLayout:
+            rows: 1
+            size_hint: 1, .1
+            pos_hint: {"top": .1, "right": 1}
+            LabelButton:
+                text: "MARKETS"
+                canvas.before:
+                    Color:
+                        rgb: app.theme_cls.primary_color if self.state == 'normal' else utils.get_color_from_hex("#6C5B7B")
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos
+                markup: True
+                on_release:
+                    app.change_screen("market_screen", direction='right', mode='push')
+            LabelButton:
+                text: "PRODUCTS"
+                canvas.before:
+                    Color:
+                        rgb: app.theme_cls.primary_color if self.state == 'normal' else utils.get_color_from_hex("#6C5B7B")
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos
+                markup: True
+                on_release:
+                    app.change_screen("bus_stop_screen", direction='up', mode='push')
+           

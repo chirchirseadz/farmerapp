@@ -1,0 +1,32 @@
+#:import utils kivy.utils
+ 
+<ProductScreen>:
+    FloatLayout:
+        GridLayout:
+            cols: 1
+            id: productbackdrop
+            pos_hint: {"top": .895, "left": 1}
+            size_hint: 1, .7
+        # MDToolbar:
+        #     title: ""
+        #     id: busstoptoolbar
+        #     right_action_items: [['magnify', lambda x: app.busstopsearch_menu.open()]]
+        #     md_bg_color: app.theme_cls.primary_light
+        #     pos_hint: {"top": .205, "left": 1}
+        #     size_hint: 1, .1
+        GridLayout:
+            rows: 1
+            size_hint: 1, .1
+            pos_hint: {"top": .1, "right": 1}
+            LabelButton:
+                text: "BACK"
+                canvas.before:
+                    Color:
+                        rgb: app.theme_cls.primary_color if self.state == 'normal' else utils.get_color_from_hex("#6C5B7B")
+                    Rectangle:
+                        size: self.size
+                        pos: self.pos
+                markup: True
+                on_release:
+                    app.change_screen("home_screen", direction='left', mode='pop')
+            

@@ -1,3 +1,83 @@
-#: include farmersmapview.kv
+	
+#:include kv/productscreen.kv
+#:include kv/homescreen.kv
+#:import utils kivy.utils
+	
+#:include kv/marketscreen.kv
+ 
+Screen:
+    MDToolbar : 
+        id: titlename
+        title : 'Market Finder'
+        left_action_items : [["menu", lambda x : nav_drawer.toggle_nav_drawer()]]
+        md_bg_color: app.theme_cls.primary_color
+        elevation : 8
+        pos_hint: {"top": 1, "left": 1}
+        size_hint: 1, .1
+        
+    NavigationLayout :
+        ScreenManager :
+            id: screen_manager
+            size_hint: 1, 1
+            pos_hint: {"top": 1, "left": 1}
+            HomeScreen:
+                name: "home_screen"
+                id: home_screen
+            MarketScreen:
+                name: "market_screen"
+                id: market_screen
+            ProductScreen:
+                name: "bus_stop_screen"
+                id: bus_stop_screen
+        MDNavigationDrawer :
+            id : nav_drawer
+            opening_transition: 'out_bounce'
+            opening_time: 1
+            closing_transition: 'in_out_cubic'
+            closin_time: 1
+            BoxLayout : 
+                orientation : 'vertical'
+                spacing : '8dp'
+                padding : '8dp'
+                ImageButton:
+                    id: profile
+                    source: app.img_source_path
+                    canvas.before:
+                        Color:
+                            rgb: app.theme_cls.primary_color if self.state == 'normal' else utils.get_color_from_hex("#6C5B7B")
+                        Rectangle:
+                            size: self.size
+                            pos: self.pos
+                    on_release:
+                        nav_drawer.toggle_nav_drawer()
+                        app.change_screen("profilephoto_screen", direction='right', mode='open')
+                    
+                MDLabel :
+                    text : 'Profile Picture'
+                    font_style : 'Subtitle1'
+                    size_hint_y : None
+                    height : self.texture_size[1]
+                MDLabel :
+                    text : 'Market Finder App!'
+                    font_style : 'Caption'
+                    size_hint_y : None
+                    height : self.texture_size[1]
+                ScrollView :
+                    MDList :
+                        OneLineIconListItem :
+                            text : 'Change Theme'
+                            on_release: 
+                                app.show_theme_picker()
+                                nav_drawer.toggle_nav_drawer()
+                            IconLeftWidget:
+                                icon: 'pencil'
+                        OneLineIconListItem :
+                            text : 'Favourite Markets'
+                            on_release: 
+                                app.go_to_favourite_bus()
+                                nav_drawer.toggle_nav_drawer()
+                            IconLeftWidget:
+                                icon: 'star'
 
-FarmersMapView:
+
+                    
